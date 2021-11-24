@@ -1,0 +1,37 @@
+diff --git a/node_modules/react-native-multiple-select/lib/react-native-multi-select.js b/node_modules/react-native-multiple-select/lib/react-native-multi-select.js
+index 2d97965..0ff4d28 100644
+--- a/node_modules/react-native-multiple-select/lib/react-native-multi-select.js
++++ b/node_modules/react-native-multiple-select/lib/react-native-multi-select.js
+@@ -7,7 +7,7 @@ import {
+   TouchableOpacity,
+   FlatList,
+   UIManager,
+-  ViewPropTypes
++  
+ } from 'react-native';
+ import PropTypes from 'prop-types';
+ import reject from 'lodash/reject';
+@@ -18,6 +18,10 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+ import styles, { colorPack } from './styles';
+ import nodeTypes from './helpers/nodeTypes';
+ 
++const ViewPropTypes = typeof document !== 'undefined' || Platform.OS === 'web'
++  ? PropTypes.shape({style: PropTypes.object})
++  : require('react-native').ViewPropTypes || View.propTypes;
++
+ // set UIManager LayoutAnimationEnabledExperimental
+ if (UIManager.setLayoutAnimationEnabledExperimental) {
+   UIManager.setLayoutAnimationEnabledExperimental(true);
+@@ -62,9 +66,9 @@ export default class MultiSelect extends Component {
+     styleMainWrapper: ViewPropTypes.style,
+     styleRowList: ViewPropTypes.style,
+     styleSelectorContainer: ViewPropTypes.style,
+-    styleTextDropdown: Text.propTypes.style,
+-    styleTextDropdownSelected: Text.propTypes.style,
+-    styleTextTag: Text.propTypes.style,
++    styleTextDropdown: ViewPropTypes.style,
++    styleTextDropdownSelected: ViewPropTypes.style,
++    styleTextTag: ViewPropTypes.style,
+     altFontFamily: PropTypes.string,
+     hideSubmitButton: PropTypes.bool,
+     hideDropdown: PropTypes.bool,
